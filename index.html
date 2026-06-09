@@ -198,9 +198,9 @@
         </div>
 
         <div class="controles">
-          <button class="btn menos" onclick="cambiar('hamb',-1)">-</button>
-          <span class="cantidad" id="hamb">0</span>
-          <button class="btn mas" onclick="cambiar('hamb',1)">+</button>
+          <button class="btn menos" onclick="cambiar('supermila',-1)">-</button>
+          <span class="cantidad" id="supermila">0</span>
+          <button class="btn mas" onclick="cambiar('supermila',1)">+</button>
         </div>
       </div>
 
@@ -211,9 +211,9 @@
         </div>
 
         <div class="controles">
-          <button class="btn menos" onclick="cambiar('mila',-1)">-</button>
-          <span class="cantidad" id="mila">0</span>
-          <button class="btn mas" onclick="cambiar('mila',1)">+</button>
+          <button class="btn menos" onclick="cambiar('milaes',-1)">-</button>
+          <span class="cantidad" id="milaes">0</span>
+          <button class="btn mas" onclick="cambiar('milaes',1)">+</button>
         </div>
       </div>
       
@@ -224,9 +224,9 @@
         </div>
 
         <div class="controles">
-          <button class="btn menos" onclick="cambiar('mila',-1)">-</button>
-          <span class="cantidad" id="mila">0</span>
-          <button class="btn mas" onclick="cambiar('mila',1)">+</button>
+          <button class="btn menos" onclick="cambiar('milaco',-1)">-</button>
+          <span class="cantidad" id="milaco">0</span>
+          <button class="btn mas" onclick="cambiar('milaco',1)">+</button>
         </div>
       </div>
 
@@ -242,9 +242,9 @@
         </div>
 
         <div class="controles">
-          <button class="btn menos" onclick="cambiar('coca',-1)">-</button>
-          <span class="cantidad" id="coca">0</span>
-          <button class="btn mas" onclick="cambiar('coca',1)">+</button>
+          <button class="btn menos" onclick="cambiar('caba15',-1)">-</button>
+          <span class="cantidad" id="caba15">0</span>
+          <button class="btn mas" onclick="cambiar('caba15',1)">+</button>
         </div>
       </div>
 
@@ -350,14 +350,15 @@
 
   <script>
     const precios = {
-      hamb: 4500,
-      mila: 5000,
-      coca: 1500,
-      oreo: 1200,
-      pepitos: 1000,
-      papas: 2500,
-      flan: 1800,
-      combo1: 5500
+      supermila: 8000,
+      milaes: 4500,
+      milaco: 3500,
+      caba15: 1500,
+      oreo: 0,
+      pepitos: 0,
+      papas: 0,
+      flan: 0,
+      combo1: 0
     };
 
     function cambiar(id, valor) {
@@ -413,9 +414,10 @@ Dirección: ${direccion}
 Productos:
 `;
       const nombres = {
-        hamb: "Hamburguesa Completa",
-        mila: "Sandwich de Milanesa",
-        coca: "Coca Cola 500ml",
+        supermila: "Super Sandwich",
+        milaes: "Sandwich Especial",
+        milaco: "Sandwich Común",
+        caba15: "Cabalgata 1,5Lt",
         oreo: "Oreo",
         pepitos: "Pepitos",
         papas: "Papas Fritas",
