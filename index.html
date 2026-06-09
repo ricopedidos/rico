@@ -1,412 +1,410 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RICO - Pedidos Online</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RICO - Pedidos Online</title>
 
-body{
-    background:#f4f4f4;
-    color:#222;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-header{
-    background:#111;
-    color:white;
-    text-align:center;
-    padding:25px;
-}
+    body {
+      background: #f4f4f4;
+      color: #222;
+    }
 
-header h1{
-    font-size:32px;
-}
+    header {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
 
-header p{
-    opacity:0.8;
-}
+    header h1 {
+      font-size: 32px;
+    }
 
-.container{
-    max-width:700px;
-    margin:auto;
-    padding:20px;
-}
+    header p {
+      opacity: 0.8;
+    }
 
-.datos{
-    background:white;
-    padding:15px;
-    border-radius:12px;
-    margin-bottom:20px;
-}
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
 
-.datos input{
-    width:100%;
-    padding:12px;
-    margin-top:5px;
-    margin-bottom:12px;
-    border:1px solid #ccc;
-    border-radius:8px;
-}
+    .datos {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
 
-.categorias{
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    margin-bottom:20px;
-    padding-bottom:5px;
-}
+    .datos input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
 
-.categorias button{
-    border:none;
-    padding:10px 15px;
-    border-radius:20px;
-    background:#ddd;
-    cursor:pointer;
-    white-space:nowrap;
-    font-weight:bold;
-}
+    .categorias {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      margin-bottom: 20px;
+      padding-bottom: 5px;
+    }
 
-.categorias button.active{
-    background:#111;
-    color:white;
-}
+    .categorias button {
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      background: #ddd;
+      cursor: pointer;
+      white-space: nowrap;
+      font-weight: bold;
+    }
 
-.categoria{
-    display:none;
-}
+    .categorias button.active {
+      background: #111;
+      color: white;
+    }
 
-.categoria.activa{
-    display:block;
-}
+    .categoria {
+      display: none;
+    }
 
-.producto{
-    background:white;
-    border-radius:12px;
-    padding:15px;
-    margin-bottom:15px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+    .categoria.activa {
+      display: block;
+    }
 
-.info h3{
-    margin-bottom:5px;
-}
+    .producto {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-.precio{
-    color:#666;
-}
+    .info h3 {
+      margin-bottom: 5px;
+    }
 
-.controles{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
+    .precio {
+      color: #666;
+    }
 
-.btn{
-    width:35px;
-    height:35px;
-    border:none;
-    border-radius:50%;
-    cursor:pointer;
-    font-size:18px;
-}
+    .controles {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.menos{
-    background:#ddd;
-}
+    .btn {
+      width: 35px;
+      height: 35px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+    }
 
-.mas{
-    background:#111;
-    color:white;
-}
+    .menos {
+      background: #ddd;
+    }
 
-.cantidad{
-    font-size:18px;
-    min-width:20px;
-    text-align:center;
-}
+    .mas {
+      background: #111;
+      color: white;
+    }
 
-.resumen{
-    background:white;
-    border-radius:12px;
-    padding:20px;
-    margin-top:20px;
-}
+    .cantidad {
+      font-size: 18px;
+      min-width: 20px;
+      text-align: center;
+    }
 
-.total{
-    font-size:24px;
-    font-weight:bold;
-    margin-bottom:15px;
-}
+    .resumen {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+    }
 
-.enviar{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    background:#25D366;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-}
-</style>
+    .total {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .enviar {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #25D366;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <header>
     <h1>RICO</h1>
     <p>Pedidos Online</p>
-</header>
+  </header>
 
-<div class="container">
+  <div class="container">
 
     <div class="datos">
-        <label>Nombre</label>
-        <input type="text" id="nombre">
+      <label>Nombre</label>
+      <input type="text" id="nombre">
 
-        <label>Dirección</label>
-        <input type="text" id="direccion">
+      <label>Dirección</label>
+      <input type="text" id="direccion">
     </div>
 
     <!-- Pestañas -->
     <div class="categorias">
-        <button class="active" onclick="mostrarCategoria('comidas', this)">🥪 Comidas</button>
-        <button onclick="mostrarCategoria('bebidas', this)">🥤 Bebidas</button>
-        <button onclick="mostrarCategoria('galletitas', this)">🍪 Galletitas</button>
-        <button onclick="mostrarCategoria('acompanamientos', this)">🍟 Acompañamientos</button>
-        <button onclick="mostrarCategoria('postres', this)">🍰 Postres</button>
-        <button onclick="mostrarCategoria('promos', this)">⭐ Promos</button>
+      <button class="active" onclick="mostrarCategoria('comidas', this)">🥪 Comidas</button>
+      <button onclick="mostrarCategoria('bebidas', this)">🥤 Bebidas</button>
+      <button onclick="mostrarCategoria('galletitas', this)">🍪 Galletitas</button>
+      <button onclick="mostrarCategoria('acompanamientos', this)">🍟 Acompañamientos</button>
+      <button onclick="mostrarCategoria('postres', this)">🍰 Postres</button>
+      <button onclick="mostrarCategoria('promos', this)">⭐ Promos</button>
     </div>
 
     <!-- COMIDAS -->
     <div id="comidas" class="categoria activa">
 
-        <div class="producto">
-            <div class="info">
-                <h3>🍔 Hamburguesa Completa</h3>
-                <div class="precio">$4500</div>
-            </div>
-
-            <div class="controles">
-                <button class="btn menos" onclick="cambiar('hamb',-1)">-</button>
-                <span class="cantidad" id="hamb">0</span>
-                <button class="btn mas" onclick="cambiar('hamb',1)">+</button>
-            </div>
+      <div class="producto">
+        <div class="info">
+          <h3>🥪 Super Sandwich</h3>
+          <div class="precio">$8000</div>
         </div>
 
-        <div class="producto">
-            <div class="info">
-                <h3>🥪 Sandwich de Milanesa</h3>
-                <div class="precio">$5000</div>
-            </div>
-
-            <div class="controles">
-                <button class="btn menos" onclick="cambiar('mila',-1)">-</button>
-                <span class="cantidad" id="mila">0</span>
-                <button class="btn mas" onclick="cambiar('mila',1)">+</button>
-            </div>
+        <div class="controles">
+          <button class="btn menos" onclick="cambiar('hamb',-1)">-</button>
+          <span class="cantidad" id="hamb">0</span>
+          <button class="btn mas" onclick="cambiar('hamb',1)">+</button>
         </div>
+      </div>
+
+      <div class="producto">
+        <div class="info">
+          <h3>🥪 Sandwich Especial</h3>
+          <div class="precio">$4500</div>
+        </div>
+
+        <div class="controles">
+          <button class="btn menos" onclick="cambiar('mila',-1)">-</button>
+          <span class="cantidad" id="mila">0</span>
+          <button class="btn mas" onclick="cambiar('mila',1)">+</button>
+        </div>
+      </div>
+      
+       <div class="producto">
+        <div class="info">
+          <h3>🥪 Sandwich Común</h3>
+          <div class="precio">$3500</div>
+        </div>
+
+        <div class="controles">
+          <button class="btn menos" onclick="cambiar('mila',-1)">-</button>
+          <span class="cantidad" id="mila">0</span>
+          <button class="btn mas" onclick="cambiar('mila',1)">+</button>
+        </div>
+      </div>
 
     </div>
 
     <!-- BEBIDAS -->
     <div id="bebidas" class="categoria">
 
-        <div class="producto">
-            <div class="info">
-                <h3>🥤 Coca Cola 500ml</h3>
-                <div class="precio">$1500</div>
-            </div>
-
-            <div class="controles">
-                <button class="btn menos" onclick="cambiar('coca',-1)">-</button>
-                <span class="cantidad" id="coca">0</span>
-                <button class="btn mas" onclick="cambiar('coca',1)">+</button>
-            </div>
+      <div class="producto">
+        <div class="info">
+          <h3>🥤 Cabalgata 1,5Lt</h3>
+          <div class="precio">$1500</div>
         </div>
+
+        <div class="controles">
+          <button class="btn menos" onclick="cambiar('coca',-1)">-</button>
+          <span class="cantidad" id="coca">0</span>
+          <button class="btn mas" onclick="cambiar('coca',1)">+</button>
+        </div>
+      </div>
 
     </div>
 
     <!-- GALLETITAS -->
     <div id="galletitas" class="categoria">
 
-        <div class="producto">
-            <div class="info">
-                <h3>🍪 Oreo</h3>
-                <div class="precio">$1200</div>
-            </div>
-
-            <div class="controles">
-                <button class="btn menos" onclick="cambiar('oreo',-1)">-</button>
-                <span class="cantidad" id="oreo">0</span>
-                <button class="btn mas" onclick="cambiar('oreo',1)">+</button>
-            </div>
+      <div class="producto">
+        <div class="info">
+          <h3>🍪 (proximamente)</h3>
+          <div class="precio">$0</div>
         </div>
 
-        <div class="producto">
-            <div class="info">
-                <h3>🍪 Pepitos</h3>
-                <div class="precio">$1000</div>
-            </div>
-
-            <div class="controles">
-                <button class="btn menos" onclick="cambiar('pepitos',-1)">-</button>
-                <span class="cantidad" id="pepitos">0</span>
-                <button class="btn mas" onclick="cambiar('pepitos',1)">+</button>
-            </div>
+        <div class="controles">
+          <button class="btn menos" onclick="cambiar('oreo',-1)">-</button>
+          <span class="cantidad" id="oreo">0</span>
+          <button class="btn mas" onclick="cambiar('oreo',1)">+</button>
         </div>
+      </div>
+
+      <div class="producto">
+        <div class="info">
+          <h3>🍪 (proximamente)</h3>
+          <div class="precio">$0</div>
+        </div>
+
+        <div class="controles">
+          <button class="btn menos" onclick="cambiar('pepitos',-1)">-</button>
+          <span class="cantidad" id="pepitos">0</span>
+          <button class="btn mas" onclick="cambiar('pepitos',1)">+</button>
+        </div>
+      </div>
 
     </div>
 
     <!-- ACOMPAÑAMIENTOS -->
     <div id="acompanamientos" class="categoria">
 
-        <div class="producto">
-            <div class="info">
-                <h3>🍟 Papas Fritas</h3>
-                <div class="precio">$2500</div>
-            </div>
-
-            <div class="controles">
-                <button class="btn menos" onclick="cambiar('papas',-1)">-</button>
-                <span class="cantidad" id="papas">0</span>
-                <button class="btn mas" onclick="cambiar('papas',1)">+</button>
-            </div>
+      <div class="producto">
+        <div class="info">
+          <h3>🍟 Papas Fritas(proximamente)</h3>
+          <div class="precio">$0</div>
         </div>
+
+        <div class="controles">
+          <button class="btn menos" onclick="cambiar('papas',-1)">-</button>
+          <span class="cantidad" id="papas">0</span>
+          <button class="btn mas" onclick="cambiar('papas',1)">+</button>
+        </div>
+      </div>
 
     </div>
 
     <!-- POSTRES -->
     <div id="postres" class="categoria">
 
-        <div class="producto">
-            <div class="info">
-                <h3>🍰 Flan Casero</h3>
-                <div class="precio">$1800</div>
-            </div>
-
-            <div class="controles">
-                <button class="btn menos" onclick="cambiar('flan',-1)">-</button>
-                <span class="cantidad" id="flan">0</span>
-                <button class="btn mas" onclick="cambiar('flan',1)">+</button>
-            </div>
+      <div class="producto">
+        <div class="info">
+          <h3>🍰 Tiramisu(proximamente)</h3>
+          <div class="precio">$0</div>
         </div>
+
+        <div class="controles">
+          <button class="btn menos" onclick="cambiar('flan',-1)">-</button>
+          <span class="cantidad" id="flan">0</span>
+          <button class="btn mas" onclick="cambiar('flan',1)">+</button>
+        </div>
+      </div>
 
     </div>
 
     <!-- PROMOS -->
     <div id="promos" class="categoria">
 
-        <div class="producto">
-            <div class="info">
-                <h3>⭐ Combo Burger + Coca</h3>
-                <div class="precio">$5500</div>
-            </div>
-
-            <div class="controles">
-                <button class="btn menos" onclick="cambiar('combo1',-1)">-</button>
-                <span class="cantidad" id="combo1">0</span>
-                <button class="btn mas" onclick="cambiar('combo1',1)">+</button>
-            </div>
+      <div class="producto">
+        <div class="info">
+          <h3>⭐ (proximamente super promos)</h3>
+          <div class="precio">$0</div>
         </div>
+
+        <div class="controles">
+          <button class="btn menos" onclick="cambiar('combo1',-1)">-</button>
+          <span class="cantidad" id="combo1">0</span>
+          <button class="btn mas" onclick="cambiar('combo1',1)">+</button>
+        </div>
+      </div>
 
     </div>
 
     <!-- RESUMEN -->
     <div class="resumen">
-        <div class="total">
-            Total: $<span id="total">0</span>
-        </div>
+      <div class="total">
+        Total: $<span id="total">0</span>
+      </div>
 
-        <button class="enviar" onclick="enviarPedido()">
-            Enviar pedido por WhatsApp
-        </button>
+      <button class="enviar" onclick="enviarPedido()">
+        Enviar pedido por WhatsApp
+      </button>
     </div>
 
-</div>
+  </div>
 
-<script>
+  <script>
+    const precios = {
+      hamb: 4500,
+      mila: 5000,
+      coca: 1500,
+      oreo: 1200,
+      pepitos: 1000,
+      papas: 2500,
+      flan: 1800,
+      combo1: 5500
+    };
 
-const precios = {
-    hamb:4500,
-    mila:5000,
-    coca:1500,
-    oreo:1200,
-    pepitos:1000,
-    papas:2500,
-    flan:1800,
-    combo1:5500
-};
-
-function cambiar(id,valor){
-
-    let actual = parseInt(
+    function cambiar(id, valor) {
+      let actual = parseInt(
         document.getElementById(id).innerText
-    );
-
-    actual += valor;
-
-    if(actual < 0){
+      );
+      actual += valor;
+      if (actual < 0) {
         actual = 0;
+      }
+      document.getElementById(id).innerText = actual;
+      actualizarTotal();
     }
 
-    document.getElementById(id).innerText = actual;
-
-    actualizarTotal();
-}
-
-function actualizarTotal(){
-
-    let total = 0;
-
-    for(const id in precios){
+    function actualizarTotal() {
+      let total = 0;
+      for (const id in precios) {
         const cantidad = parseInt(
-            document.getElementById(id).innerText
+          document.getElementById(id).innerText
         );
-
         total += cantidad * precios[id];
+      }
+      document.getElementById("total").innerText = total;
     }
 
-    document.getElementById("total").innerText = total;
-}
-
-function mostrarCategoria(id, boton){
-
-    document
+    function mostrarCategoria(id, boton) {
+      document
         .querySelectorAll(".categoria")
         .forEach(categoria => {
-            categoria.classList.remove("activa");
+          categoria.classList.remove("activa");
         });
-
-    document
+      document
         .querySelectorAll(".categorias button")
         .forEach(btn => {
-            btn.classList.remove("active");
+          btn.classList.remove("active");
         });
-
-    document
+      document
         .getElementById(id)
         .classList.add("activa");
+      boton.classList.add("active");
+    }
 
-    boton.classList.add("active");
-}
-
-function enviarPedido(){
-
-    const nombre = document.getElementById("nombre").value;
-    const direccion = document.getElementById("direccion").value;
-
-    let mensaje =
-`🍔 PEDIDO RICO
+    function enviarPedido() {
+      const nombre = document.getElementById("nombre").value;
+      const direccion = document.getElementById("direccion").value;
+      let mensaje =
+        `🍔 PEDIDO RICO
 
 Cliente: ${nombre}
 
@@ -414,41 +412,34 @@ Dirección: ${direccion}
 
 Productos:
 `;
-
-    const nombres = {
-        hamb:"Hamburguesa Completa",
-        mila:"Sandwich de Milanesa",
-        coca:"Coca Cola 500ml",
-        oreo:"Oreo",
-        pepitos:"Pepitos",
-        papas:"Papas Fritas",
-        flan:"Flan Casero",
-        combo1:"Combo Burger + Coca"
-    };
-
-    for(const id in precios){
-
+      const nombres = {
+        hamb: "Hamburguesa Completa",
+        mila: "Sandwich de Milanesa",
+        coca: "Coca Cola 500ml",
+        oreo: "Oreo",
+        pepitos: "Pepitos",
+        papas: "Papas Fritas",
+        flan: "Flan Casero",
+        combo1: "Combo Burger + Coca"
+      };
+      for (const id in precios) {
         const cantidad = parseInt(
-            document.getElementById(id).innerText
+          document.getElementById(id).innerText
         );
-
-        if(cantidad > 0){
-            mensaje += `${nombres[id]} x${cantidad}
+        if (cantidad > 0) {
+          mensaje += `${nombres[id]} x${cantidad}
 `;
         }
-    }
-
-    mensaje += `
+      }
+      mensaje += `
 Total: $${document.getElementById("total").innerText}`;
-
-    const numero = "5493731558574";
-
-    window.open(
+      const numero = "5493731558574";
+      window.open(
         `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`
-    );
-}
-
-</script>
+      );
+    }
+  </script>
 
 </body>
+
 </html>
