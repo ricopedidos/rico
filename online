@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RICO - Pedidos Online</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    color:#222;
+}
+
+header{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+header h1{
+    font-size:32px;
+}
+
+header p{
+    opacity:0.8;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    padding:20px;
+}
+
+.datos{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.datos input{
+    width:100%;
+    padding:12px;
+    margin-top:5px;
+    margin-bottom:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.categorias{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    margin-bottom:20px;
+    padding-bottom:5px;
+}
+
+.categorias button{
+    border:none;
+    padding:10px 15px;
+    border-radius:20px;
+    background:#ddd;
+    cursor:pointer;
+    white-space:nowrap;
+    font-weight:bold;
+}
+
+.categorias button.active{
+    background:#111;
+    color:white;
+}
+
+.categoria{
+    display:none;
+}
+
+.categoria.activa{
+    display:block;
+}
+
+.producto{
+    background:white;
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.info h3{
+    margin-bottom:5px;
+}
+
+.precio{
+    color:#666;
+}
+
+.controles{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.btn{
+    width:35px;
+    height:35px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.menos{
+    background:#ddd;
+}
+
+.mas{
+    background:#111;
+    color:white;
+}
+
+.cantidad{
+    font-size:18px;
+    min-width:20px;
+    text-align:center;
+}
+
+.resumen{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    margin-top:20px;
+}
+
+.total{
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.enviar{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#25D366;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>RICO</h1>
+    <p>Pedidos Online</p>
+</header>
+
+<div class="container">
+
+    <div class="datos">
+        <label>Nombre</label>
+        <input type="text" id="nombre">
+
+        <label>Dirección</label>
+        <input type="text" id="direccion">
+    </div>
+
+    <!-- Pestañas -->
+    <div class="categorias">
+        <button class="active" onclick="mostrarCategoria('comidas', this)">🥪 Comidas</button>
+        <button onclick="mostrarCategoria('bebidas', this)">🥤 Bebidas</button>
+        <button onclick="mostrarCategoria('galletitas', this)">🍪 Galletitas</button>
+        <button onclick="mostrarCategoria('acompanamientos', this)">🍟 Acompañamientos</button>
+        <button onclick="mostrarCategoria('postres', this)">🍰 Postres</button>
+        <button onclick="mostrarCategoria('promos', this)">⭐ Promos</button>
+    </div>
+
+    <!-- COMIDAS -->
+    <div id="comidas" class="categoria activa">
+
+        <div class="producto">
+            <div class="info">
+                <h3>🍔 Hamburguesa Completa</h3>
+                <div class="precio">$4500</div>
+            </div>
+
+            <div class="controles">
+                <button class="btn menos" onclick="cambiar('hamb',-1)">-</button>
+                <span class="cantidad" id="hamb">0</span>
+                <button class="btn mas" onclick="cambiar('hamb',1)">+</button>
+            </div>
+        </div>
+
+        <div class="producto">
+            <div class="info">
+                <h3>🥪 Sandwich de Milanesa</h3>
+                <div class="precio">$5000</div>
+            </div>
+
+            <div class="controles">
+                <button class="btn menos" onclick="cambiar('mila',-1)">-</button>
+                <span class="cantidad" id="mila">0</span>
+                <button class="btn mas" onclick="cambiar('mila',1)">+</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BEBIDAS -->
+    <div id="bebidas" class="categoria">
+
+        <div class="producto">
+            <div class="info">
+                <h3>🥤 Coca Cola 500ml</h3>
+                <div class="precio">$1500</div>
+            </div>
+
+            <div class="controles">
+                <button class="btn menos" onclick="cambiar('coca',-1)">-</button>
+                <span class="cantidad" id="coca">0</span>
+                <button class="btn mas" onclick="cambiar('coca',1)">+</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- GALLETITAS -->
+    <div id="galletitas" class="categoria">
+
+        <div class="producto">
+            <div class="info">
+                <h3>🍪 Oreo</h3>
+                <div class="precio">$1200</div>
+            </div>
+
+            <div class="controles">
+                <button class="btn menos" onclick="cambiar('oreo',-1)">-</button>
+                <span class="cantidad" id="oreo">0</span>
+                <button class="btn mas" onclick="cambiar('oreo',1)">+</button>
+            </div>
+        </div>
+
+        <div class="producto">
+            <div class="info">
+                <h3>🍪 Pepitos</h3>
+                <div class="precio">$1000</div>
+            </div>
+
+            <div class="controles">
+                <button class="btn menos" onclick="cambiar('pepitos',-1)">-</button>
+                <span class="cantidad" id="pepitos">0</span>
+                <button class="btn mas" onclick="cambiar('pepitos',1)">+</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ACOMPAÑAMIENTOS -->
+    <div id="acompanamientos" class="categoria">
+
+        <div class="producto">
+            <div class="info">
+                <h3>🍟 Papas Fritas</h3>
+                <div class="precio">$2500</div>
+            </div>
+
+            <div class="controles">
+                <button class="btn menos" onclick="cambiar('papas',-1)">-</button>
+                <span class="cantidad" id="papas">0</span>
+                <button class="btn mas" onclick="cambiar('papas',1)">+</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- POSTRES -->
+    <div id="postres" class="categoria">
+
+        <div class="producto">
+            <div class="info">
+                <h3>🍰 Flan Casero</h3>
+                <div class="precio">$1800</div>
+            </div>
+
+            <div class="controles">
+                <button class="btn menos" onclick="cambiar('flan',-1)">-</button>
+                <span class="cantidad" id="flan">0</span>
+                <button class="btn mas" onclick="cambiar('flan',1)">+</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PROMOS -->
+    <div id="promos" class="categoria">
+
+        <div class="producto">
+            <div class="info">
+                <h3>⭐ Combo Burger + Coca</h3>
+                <div class="precio">$5500</div>
+            </div>
+
+            <div class="controles">
+                <button class="btn menos" onclick="cambiar('combo1',-1)">-</button>
+                <span class="cantidad" id="combo1">0</span>
+                <button class="btn mas" onclick="cambiar('combo1',1)">+</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RESUMEN -->
+    <div class="resumen">
+        <div class="total">
+            Total: $<span id="total">0</span>
+        </div>
+
+        <button class="enviar" onclick="enviarPedido()">
+            Enviar pedido por WhatsApp
+        </button>
+    </div>
+
+</div>
+
+<script>
+
+const precios = {
+    hamb:4500,
+    mila:5000,
+    coca:1500,
+    oreo:1200,
+    pepitos:1000,
+    papas:2500,
+    flan:1800,
+    combo1:5500
+};
+
+function cambiar(id,valor){
+
+    let actual = parseInt(
+        document.getElementById(id).innerText
+    );
+
+    actual += valor;
+
+    if(actual < 0){
+        actual = 0;
+    }
+
+    document.getElementById(id).innerText = actual;
+
+    actualizarTotal();
+}
+
+function actualizarTotal(){
+
+    let total = 0;
+
+    for(const id in precios){
+        const cantidad = parseInt(
+            document.getElementById(id).innerText
+        );
+
+        total += cantidad * precios[id];
+    }
+
+    document.getElementById("total").innerText = total;
+}
+
+function mostrarCategoria(id, boton){
+
+    document
+        .querySelectorAll(".categoria")
+        .forEach(categoria => {
+            categoria.classList.remove("activa");
+        });
+
+    document
+        .querySelectorAll(".categorias button")
+        .forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+    document
+        .getElementById(id)
+        .classList.add("activa");
+
+    boton.classList.add("active");
+}
+
+function enviarPedido(){
+
+    const nombre = document.getElementById("nombre").value;
+    const direccion = document.getElementById("direccion").value;
+
+    let mensaje =
+`🍔 PEDIDO RICO
+
+Cliente: ${nombre}
+
+Dirección: ${direccion}
+
+Productos:
+`;
+
+    const nombres = {
+        hamb:"Hamburguesa Completa",
+        mila:"Sandwich de Milanesa",
+        coca:"Coca Cola 500ml",
+        oreo:"Oreo",
+        pepitos:"Pepitos",
+        papas:"Papas Fritas",
+        flan:"Flan Casero",
+        combo1:"Combo Burger + Coca"
+    };
+
+    for(const id in precios){
+
+        const cantidad = parseInt(
+            document.getElementById(id).innerText
+        );
+
+        if(cantidad > 0){
+            mensaje += `${nombres[id]} x${cantidad}
+`;
+        }
+    }
+
+    mensaje += `
+Total: $${document.getElementById("total").innerText}`;
+
+    const numero = "5493731558574";
+
+    window.open(
+        `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`
+    );
+}
+
+</script>
+
+</body>
+</html>
