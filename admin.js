@@ -43,7 +43,7 @@ async function cargarProductos() {
   });
 
   mostrarProductos();
-  generarBotonesCategorias();
+generarCategorias();
 }
 
 function mostrarProductos(lista = productos) {
@@ -58,70 +58,70 @@ function mostrarProductos(lista = productos) {
     contenedor.innerHTML += `
       <div class="producto">
 
-        <h3>${producto.nombre}</h3>
+  <div
+    class="cabecera-producto"
+    onclick="toggleProducto('${producto.id}')">
 
-        <label>Categoría</label>
+    <h3>${producto.nombre}</h3>
 
-        <input
-         type="text"
-         id="categoria-${producto.id}"
-         value="${producto.categoria || ''}">
+  </div>
 
-        <label>Precio</label>
+  <div
+    class="contenido-producto"
+    id="contenido-${producto.id}"
+    style="display:none;">
 
-        <input
-          type="number"
-          id="precio-${producto.id}"
-          value="${producto.precio}">
+    <label>Categoría</label>
 
-        <label>Estado</label>
+    <input
+      type="text"
+      id="categoria-${producto.id}"
+      value="${producto.categoria || ''}">
 
-<select id="stock-${producto.id}">
+    <label>Precio</label>
 
-  <option
-    value="1"
-    ${producto.stock > 0 ? "selected" : ""}>
-    Disponible
-  </option>
+    <input
+      type="number"
+      id="precio-${producto.id}"
+      value="${producto.precio}">
 
-  <option
-    value="0"
-    ${producto.stock <= 0 ? "selected" : ""}>
-    Agotado
-  </option>
+    <label>Estado</label>
 
-</select>
+    <select id="stock-${producto.id}">
+      <option
+        value="1"
+        ${producto.stock > 0 ? "selected" : ""}>
+        Disponible
+      </option>
 
-        <label>Imagen</label>
+      <option
+        value="0"
+        ${producto.stock <= 0 ? "selected" : ""}>
+        Agotado
+      </option>
+    </select>
 
-        <input
-          type="text"
-          id="imagen-${producto.id}"
-          value="${producto.imagen || ''}">
+    <label>Imagen</label>
 
-        <button
-         class="eliminar"
-         onclick="eliminarProducto('${producto.id}')">
-         🗑 Eliminar
-        </button>
+    <input
+      type="text"
+      id="imagen-${producto.id}"
+      value="${producto.imagen || ''}">
 
-        <div class="controles">
+    <button
+      class="eliminar"
+      onclick="eliminarProducto('${producto.id}')">
 
+      🗑 Eliminar
 
-      </div>
+    </button>
+
+  </div>
+
+</div>
+
     `;
   });
-
-let alertaStock = "";
-
-if (producto.stock === 0) {
-
-  alertaStock = "❌ Agotado";
-
-} else if (producto.stock <= 10) {
-
-  alertaStock = "⚠ Poco stock";
-}
 
 }
 
@@ -227,7 +227,7 @@ window.eliminarProducto = async function(id) {
     );
 
   mostrarProductos();
-
+generarCategorias();
   alert("Producto eliminado");
 }
 
@@ -255,14 +255,14 @@ document
 
 let categoriaActual = "todos";
 
-function generarBotonesCategorias() {
+function generarCategorias() {
 
-  const contenedor =
+  const filtros =
     document.getElementById("filtros-admin");
 
-  contenedor.innerHTML = "";
+  filtros.innerHTML = "";
 
-  contenedor.innerHTML += `
+  filtros.innerHTML += `
     <button
       class="activo"
       onclick="filtrarCategoria('todos', this)">
@@ -280,7 +280,7 @@ function generarBotonesCategorias() {
 
   categorias.forEach(categoria => {
 
-    contenedor.innerHTML += `
+    filtros.innerHTML += `
       <button
         onclick="filtrarCategoria('${categoria}', this)">
         ${categoria}
@@ -303,7 +303,20 @@ window.filtrarCategoria = function(categoria, boton) {
 
   boton.classList.add("activo");
 
-  aplicarFiltros();
+  if (categoria === "todos") {
+
+    mostrarProductos();
+
+    return;
+  }
+
+  const filtrados =
+    productos.filter(
+      p => p.categoria === categoria
+    );
+
+  mostrarProductos(filtrados);
+
 }
 
 function aplicarFiltros() {
@@ -352,6 +365,25 @@ window.toggleNuevoProducto = function() {
   } else {
 
     panel.style.display = "none";
+
+  }
+
+}
+
+window.toggleProducto = function(id) {
+
+  const contenido =
+    document.getElementById(
+      `contenido-${id}`
+    );
+
+  if (contenido.style.display === "none") {
+
+    contenido.style.display = "block";
+
+  } else {
+
+    contenido.style.display = "none";
 
   }
 
