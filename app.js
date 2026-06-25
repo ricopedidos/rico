@@ -15,6 +15,7 @@ const db = getFirestore(app);
 
 let todosLosProductos = [];
 let carrito = {};
+let categoriaActual = "todos";
 
 async function cargarProductos() {
 
@@ -29,6 +30,7 @@ async function cargarProductos() {
   });
 
   mostrarProductos(todosLosProductos);
+generarCategorias();
 }
 
 function mostrarProductos(lista) {
@@ -109,27 +111,74 @@ if (producto.stock <= 0) {
   });
 }
 
-window.filtrar = function(categoria) {
+window.filtrar = function(categoria, boton) {
+
+  categoriaActual = categoria;
 
   document
     .querySelectorAll("#filtros button")
-    .forEach(btn => btn.classList.remove("activo"));
+    .forEach(btn =>
+      btn.classList.remove("activo")
+    );
 
-  event.target.classList.add("activo");
-
-  if (categoria === "todos") {
-    mostrarProductos(todosLosProductos);
-    return;
+  if (boton) {
+    boton.classList.add("activo");
   }
 
-  const filtrados = todosLosProductos.filter(
-    p => p.categoria.toLowerCase() === categoria
-  );
+  if (categoria === "todos") {
 
-  mostrarProductos(filtrados);
+    mostrarProductos(todosLosProductos);
+
+  } else {
+
+    const filtrados =
+      todosLosProductos.filter(
+        p => p.categoria === categoria
+      );
+
+    mostrarProductos(filtrados);
+
+  }
+
 }
 
 cargarProductos();
+
+function generarCategorias() {
+
+  const filtros =
+    document.getElementById("filtros");
+
+  filtros.innerHTML = "";
+
+  filtros.innerHTML += `
+    <button
+      class="activo"
+      onclick="filtrar('todos', this)">
+      Todos
+    </button>
+  `;
+
+  const categorias = [
+    ...new Set(
+      todosLosProductos.map(
+        p => p.categoria
+      )
+    )
+  ];
+
+  categorias.forEach(categoria => {
+
+    filtros.innerHTML += `
+      <button
+        onclick="filtrar('${categoria}', this)">
+        ${categoria}
+      </button>
+    `;
+
+  });
+
+}
 
 function actualizarCarrito() {
 
@@ -208,6 +257,9 @@ window.enviarWhatsApp = function() {
 
   let mensaje = "Hola, quiero pedir:%0A%0A";
 
+  const nombre =
+  document.getElementById("nombre").value;
+
   const direccion =
   document.getElementById("direccion").value;
 
@@ -231,6 +283,12 @@ window.enviarWhatsApp = function() {
   });
 
   mensaje += `%0A💰 Total: $${total}`;
+
+if (nombre.trim() !== "") {
+
+  mensaje += `%0A👤 Nombre:%0A${nombre}%0A`;
+
+}
 
   if (direccion.trim() !== "") {
 
@@ -344,4 +402,30 @@ window.buscarProductos = function() {
     );
 
   mostrarProductos(filtrados);
+}
+
+window.toggleCarrito = function() {
+
+  const carrito =
+    document.getElementById(
+      "detalle-carrito"
+    );
+
+  const flecha =
+    document.getElementById(
+      "flecha-carrito"
+    );
+
+  if (carrito.style.display === "none") {
+
+    carrito.style.display = "block";
+    flecha.textContent = "▲";
+
+  } else {
+
+    carrito.style.display = "none";
+    flecha.textContent = "▼";
+
+  }
+
 }
