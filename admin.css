@@ -75,3 +75,18 @@ input {
     width: auto;
     padding: 12px 20px;
 }
+
+.cabecera-producto {
+    cursor: pointer;
+    padding: 12px;
+    background: #2a2a2a;
+    border-radius: 8px;
+}
+
+.cabecera-producto h3 {
+    margin: 0;
+}
+
+.contenido-producto {
+    margin-top: 10px;
+}
