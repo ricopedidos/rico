@@ -1,447 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
-
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RICO - Pedidos Online</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #f4f4f4;
-      color: #222;
-    }
-
-    header {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 25px;
-    }
-
-    header h1 {
-      font-size: 32px;
-    }
-
-    header p {
-      opacity: 0.8;
-    }
-
-    .container {
-      max-width: 700px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    .datos {
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-
-    .datos input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 5px;
-      margin-bottom: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    .categorias {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      margin-bottom: 20px;
-      padding-bottom: 5px;
-    }
-
-    .categorias button {
-      border: none;
-      padding: 10px 15px;
-      border-radius: 20px;
-      background: #ddd;
-      cursor: pointer;
-      white-space: nowrap;
-      font-weight: bold;
-    }
-
-    .categorias button.active {
-      background: #111;
-      color: white;
-    }
-
-    .categoria {
-      display: none;
-    }
-
-    .categoria.activa {
-      display: block;
-    }
-
-    .producto {
-      background: white;
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .info h3 {
-      margin-bottom: 5px;
-    }
-
-    .precio {
-      color: #666;
-    }
-
-    .controles {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn {
-      width: 35px;
-      height: 35px;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-    }
-
-    .menos {
-      background: #ddd;
-    }
-
-    .mas {
-      background: #111;
-      color: white;
-    }
-
-    .cantidad {
-      font-size: 18px;
-      min-width: 20px;
-      text-align: center;
-    }
-
-    .resumen {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 20px;
-    }
-
-    .total {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .enviar {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 10px;
-      background: #25D366;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-    }
-  </style>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rico</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <header>
-    <h1>RICOso</h1>
-    <p>Pedidos Online</p>
-  </header>
+    <h1>RICO</h1>
+<p class="subtitulo">Hace tu pedido</p>
 
-  <div class="container">
+<div id="carrito">
+    🛒 Carrito (<span id="cantidad-carrito">0</span>)
+</div>
 
-    <div class="datos">
-      <label>Nombre</label>
-      <input type="text" id="nombre">
+<div id="detalle-carrito">
+    <h2>Tu pedido</h2>
 
-      <label>Dirección</label>
-      <input type="text" id="direccion">
-    </div>
+    <ul id="lista-carrito"></ul>
 
-    <!-- Pestañas -->
-    <div class="categorias">
-      <button class="active" onclick="mostrarCategoria('comidas', this)">🥪 Comidas</button>
-      <button onclick="mostrarCategoria('bebidas', this)">🥤 Bebidas</button>
-      <button onclick="mostrarCategoria('galletitas', this)">🍪 Galletitas</button>
-      <button onclick="mostrarCategoria('acompanamientos', this)">🍟 Acompañamientos</button>
-      <button onclick="mostrarCategoria('postres', this)">🍰 Postres</button>
-      <button onclick="mostrarCategoria('promos', this)">⭐ Promos</button>
-    </div>
-
-    <!-- COMIDAS -->
-    <div id="comidas" class="categoria activa">
-
-      <div class="producto">
-        <div class="info">
-          <h3>🥪 Super Sandwich</h3>
-          <div class="precio">$8000</div>
-        </div>
-
-        <div class="controles">
-          <button class="btn menos" onclick="cambiar('supermila',-1)">-</button>
-          <span class="cantidad" id="supermila">0</span>
-          <button class="btn mas" onclick="cambiar('supermila',1)">+</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <div class="info">
-          <h3>🥪 Sandwich Especial</h3>
-          <div class="precio">$4500</div>
-        </div>
-
-        <div class="controles">
-          <button class="btn menos" onclick="cambiar('milaes',-1)">-</button>
-          <span class="cantidad" id="milaes">0</span>
-          <button class="btn mas" onclick="cambiar('milaes',1)">+</button>
-        </div>
-      </div>
-      
-       <div class="producto">
-        <div class="info">
-          <h3>🥪 Sandwich Común</h3>
-          <div class="precio">$3500</div>
-        </div>
-
-        <div class="controles">
-          <button class="btn menos" onclick="cambiar('milaco',-1)">-</button>
-          <span class="cantidad" id="milaco">0</span>
-          <button class="btn mas" onclick="cambiar('milaco',1)">+</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- BEBIDAS -->
-    <div id="bebidas" class="categoria">
-
-      <div class="producto">
-        <div class="info">
-          <h3>🥤 Cabalgata 1,5Lt</h3>
-          <div class="precio">$1500</div>
-        </div>
-
-        <div class="controles">
-          <button class="btn menos" onclick="cambiar('caba15',-1)">-</button>
-          <span class="cantidad" id="caba15">0</span>
-          <button class="btn mas" onclick="cambiar('caba15',1)">+</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- GALLETITAS -->
-    <div id="galletitas" class="categoria">
-
-      <div class="producto">
-        <div class="info">
-          <h3>🍪 (proximamente)</h3>
-          <div class="precio">$0</div>
-        </div>
-
-        <div class="controles">
-          <button class="btn menos" onclick="cambiar('oreo',-1)">-</button>
-          <span class="cantidad" id="oreo">0</span>
-          <button class="btn mas" onclick="cambiar('oreo',1)">+</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <div class="info">
-          <h3>🍪 (proximamente)</h3>
-          <div class="precio">$0</div>
-        </div>
-
-        <div class="controles">
-          <button class="btn menos" onclick="cambiar('pepitos',-1)">-</button>
-          <span class="cantidad" id="pepitos">0</span>
-          <button class="btn mas" onclick="cambiar('pepitos',1)">+</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ACOMPAÑAMIENTOS -->
-    <div id="acompanamientos" class="categoria">
-
-      <div class="producto">
-        <div class="info">
-          <h3>🍟 Papas Fritas(proximamente)</h3>
-          <div class="precio">$0</div>
-        </div>
-
-        <div class="controles">
-          <button class="btn menos" onclick="cambiar('papas',-1)">-</button>
-          <span class="cantidad" id="papas">0</span>
-          <button class="btn mas" onclick="cambiar('papas',1)">+</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- POSTRES -->
-    <div id="postres" class="categoria">
-
-      <div class="producto">
-        <div class="info">
-          <h3>🍰 Tiramisu(proximamente)</h3>
-          <div class="precio">$0</div>
-        </div>
-
-        <div class="controles">
-          <button class="btn menos" onclick="cambiar('flan',-1)">-</button>
-          <span class="cantidad" id="flan">0</span>
-          <button class="btn mas" onclick="cambiar('flan',1)">+</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- PROMOS -->
-    <div id="promos" class="categoria">
-
-      <div class="producto">
-        <div class="info">
-          <h3>⭐ (proximamente super promos)</h3>
-          <div class="precio">$0</div>
-        </div>
-
-        <div class="controles">
-          <button class="btn menos" onclick="cambiar('combo1',-1)">-</button>
-          <span class="cantidad" id="combo1">0</span>
-          <button class="btn mas" onclick="cambiar('combo1',1)">+</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESUMEN -->
-    <div class="resumen">
-      <div class="total">
+    <h3>
         Total: $<span id="total">0</span>
-      </div>
+    </h3>
 
-      <button class="enviar" onclick="enviarPedido()">
-        Enviar pedido por WhatsApp
-      </button>
-    </div>
+    <button id="btn-whatsapp" onclick="enviarWhatsApp()">
+    Pedir por WhatsApp
+    </button>
+    
 
-  </div>
+    <input
+    type="text"
+    id="direccion"
+    placeholder="Dirección de entrega">
 
-  <script>
-    const precios = {
-      supermila: 8000,
-      milaes: 4500,
-      milaco: 3500,
-      caba15: 1500,
-      oreo: 0,
-      pepitos: 0,
-      papas: 0,
-      flan: 0,
-      combo1: 0
-    };
+    <textarea
+    id="observaciones"
+    placeholder="Observaciones (opcional)"></textarea>
 
-    function cambiar(id, valor) {
-      let actual = parseInt(
-        document.getElementById(id).innerText
-      );
-      actual += valor;
-      if (actual < 0) {
-        actual = 0;
-      }
-      document.getElementById(id).innerText = actual;
-      actualizarTotal();
-    }
+    <button id="btn-ubicacion" onclick="obtenerUbicacion()">
+    📍 Compartir ubicación
+    </button>
 
-    function actualizarTotal() {
-      let total = 0;
-      for (const id in precios) {
-        const cantidad = parseInt(
-          document.getElementById(id).innerText
-        );
-        total += cantidad * precios[id];
-      }
-      document.getElementById("total").innerText = total;
-    }
+    <input
+    type="hidden"
+    id="ubicacion">
 
-    function mostrarCategoria(id, boton) {
-      document
-        .querySelectorAll(".categoria")
-        .forEach(categoria => {
-          categoria.classList.remove("activa");
-        });
-      document
-        .querySelectorAll(".categorias button")
-        .forEach(btn => {
-          btn.classList.remove("active");
-        });
-      document
-        .getElementById(id)
-        .classList.add("activa");
-      boton.classList.add("active");
-    }
+    <button id="btn-vaciar" onclick="vaciarCarrito()">
+    🗑 Vaciar carrito
+    </button>
 
-    function enviarPedido() {
-      const nombre = document.getElementById("nombre").value;
-      const direccion = document.getElementById("direccion").value;
-      let mensaje =
-        `🍔 PEDIDO RICO
+</div>
 
-Cliente: ${nombre}
+<div id="filtros">
+    <button class="activo" onclick="filtrar('todos')">Todos</button>
+    <button onclick="filtrar('bebidas')">Bebidas</button>
+    <button onclick="filtrar('comidas')">Comidas</button>
+    <button onclick="filtrar('helados')">Helados</button>
+</div>
 
-Dirección: ${direccion}
+    <input
+    type="text"
+    id="buscador"
+    placeholder="🔍 Buscar productos..."
+    onkeyup="buscarProductos()">
 
-Productos:
-`;
-      const nombres = {
-        supermila: "Super Sandwich",
-        milaes: "Sandwich Especial",
-        milaco: "Sandwich Común",
-        caba15: "Cabalgata 1,5Lt",
-        oreo: "Oreo",
-        pepitos: "Pepitos",
-        papas: "Papas Fritas",
-        flan: "Flan Casero",
-        combo1: "Combo Burger + Coca"
-      };
-      for (const id in precios) {
-        const cantidad = parseInt(
-          document.getElementById(id).innerText
-        );
-        if (cantidad > 0) {
-          mensaje += `${nombres[id]} x${cantidad}
-`;
-        }
-      }
-      mensaje += `
-Total: $${document.getElementById("total").innerText}`;
-      const numero = "5493731558574";
-      window.open(
-        `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`
-      );
-    }
-  </script>
+    <div id="productos"></div>
+
+    <script type="module" src="app.js"></script>
 
 </body>
-
 </html>
